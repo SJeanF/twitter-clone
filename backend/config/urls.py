@@ -19,12 +19,21 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-from accounts.views import MyProfileView
+from accounts.views import (MyProfileView, UserListView, UserDetailView,
+                            FollowView, FollowersListView, FollowingListView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/auth/', include('accounts.urls')),
     path('api/profile/me/', MyProfileView.as_view(), name='my-profile'),
+
+    path('api/users/', UserListView.as_view(), name='user-list'),
+    path('api/users/<str:username>/', UserDetailView.as_view(), name='user-detail'),
+    path('api/users/<str:username>/follow/', FollowView.as_view(), name='user-follow'),
+    path('api/users/<str:username>/followers/', FollowersListView.as_view(), name='user-followers'),
+    path('api/users/<str:username>/following/', FollowingListView.as_view(), name='user-following'),
+
+    path('api/', include('posts.urls')),
 ]
 
 if settings.DEBUG:
