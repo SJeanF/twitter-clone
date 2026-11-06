@@ -157,3 +157,6 @@ CORS_ALLOWED_ORIGINS = [
 # Upload de fotos de perfil (vamos usar na Etapa 3)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# Atrás do proxy do PythonAnywhere, o Django precisa saber que a conexão é HTTPS
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
